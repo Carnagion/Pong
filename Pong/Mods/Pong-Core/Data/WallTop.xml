@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Object Type="Pong.Wall" Id="WallTop">
+    <Position>(320, -15)</Position>
+    <BounceDirection>(0, 1)</BounceDirection>
+    <Children>
+        <item Type="Godot.CollisionShape2D">
+            <Shape Type="Godot.RectangleShape2D">
+                <Extents>(320, 15)</Extents>
+            </Shape>
+        </item>
+    </Children>
+</Object>

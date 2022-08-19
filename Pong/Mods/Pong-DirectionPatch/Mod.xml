@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Mod>
+    <Id>Pong-DirectionPatch</Id>
+    <Name>Pong Direction Patch</Name>
+    <Author>YOUR NAME</Author>
+    <After>
+        <item>Pong-Core</item>
+    </After>
+</Mod>

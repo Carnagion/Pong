@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch Type="Godot.Modding.Patching.TargetedPatch">
+    <Targets>//*[@Id="Ball"]</Targets>
+    <Patch Type="Godot.Modding.Patching.MultiPatch">
+        <Patches>
+            <item Type="Godot.Modding.Patching.TargetedPatch">
+                <Targets>Direction</Targets>
+                <Patch Type="Godot.Modding.Patching.NodeRemovePatch"/>
+            </item>
+            <item Type="Godot.Modding.Patching.NodeAddPatch">
+                <Value>
+                    <Direction>(-1, 0)</Direction>
+                </Value>
+            </item>
+        </Patches>
+    </Patch>
+</Patch>

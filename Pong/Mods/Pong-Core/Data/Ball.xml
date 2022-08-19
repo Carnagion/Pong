@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Object Type="Pong.Ball" Id="Ball">
+    <texturePath>res://Ball.png</texturePath>
+    <Position>(320, 240)</Position>
+    <initialPosition>(320, 240)</initialPosition>
+    <Direction>(1, 0)</Direction>
+    <Speed>200</Speed>
+    <Children>
+        <item Type="Godot.Sprite">
+            <Name>Sprite</Name>
+        </item>
+        <item Type="Godot.CollisionShape2D">
+            <Shape Type="Godot.CircleShape2D">
+                <Radius>15</Radius>
+            </Shape>
+        </item>
+    </Children>
+</Object>

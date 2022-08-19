@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Object Type="Pong.Paddle" Id="PaddleRight">
+    <texturePath>res://PaddleRight.png</texturePath>
+    <Position>(600, 240)</Position>
+    <Speed>100</Speed>
+    <UpAction>Up</UpAction>
+    <DownAction>Down</DownAction>
+    <Children>
+        <item Type="Godot.Sprite">
+            <Name>Sprite</Name>
+        </item>
+        <item Type="Godot.CollisionShape2D">
+            <Shape Type="Godot.RectangleShape2D">
+                <Extents>(8.5, 64)</Extents>
+            </Shape>
+        </item>
+    </Children>
+</Object>

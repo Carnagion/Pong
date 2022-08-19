@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Object Type="Pong.Goal" Id="GoalRight">
+    <Position>(655, 240)</Position>
+    <Children>
+        <item Type="Godot.CollisionShape2D">
+            <Shape Type="Godot.RectangleShape2D">
+                <Extents>(15, 240)</Extents>
+            </Shape>
+        </item>
+    </Children>
+</Object>
