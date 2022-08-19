@@ -31,9 +31,7 @@ You will also need to download/install the following, if you have not already do
 
 > **Note:** Downloading an external editor is optional, but *highly* recommended. Most editors and IDEs provide advanced features - such as autocomplete, improved intellisense, quick fixes, and so on - which are not available in Godot's in-built script editor.
 
-# Walkthrough
-
-## Project structure
+# Project structure
 
 A normal Godot application would usually consist of a single Godot project, with all source code and assets contained in a single directory (`res://`).
 
@@ -50,7 +48,7 @@ Therefore, for this demo, a modular structure will be used - it will consist of 
 
 In this demo, bundled mods - the mods that are part of the application itself - will be stored in the `res://Mods` directory, while user-created mods - mods that are optional and (usually) created by users - will be loaded from the `user://Mods` directory.
 
-## Setting up the main project
+# Setting up the main project
 
 The main project - named "Pong" - will be the entry point of the application, and will be responsible for loading all mods - both bundled mods (from `res://Mods`) and user-created mods (from `user://Mods`).
 
@@ -112,7 +110,7 @@ Doing this provides a better development experience as **Modot**'s and **GDSeria
 
 Now, navigate to `Project` -> `Project Settings...` -> `Display` -> `Window` and set the width and height to 640 and 480 respectively.
 
-## Loading mods
+# Loading mods
 
 The vast majority of games load mods as soon as they startup, though there are a few that load mods at other times, such as when actually loading a save file or starting a new save. **Modot** is highly flexible, and the code for loading mods remains the same regardless of when you choose to load them.
 
@@ -193,7 +191,7 @@ public override void _Ready()
 
 > **Note:** `CallDeferred()` is used instead of simply loading all mods directly in `_Ready()` because if a mod tries to add a scene or node to the tree using `AddChild()` during loading, then Godot will throw an error as the main scene's `_Ready()` function won't have finished.
 
-## Setting up the core game
+# Setting up the core game
 
 Now comes the actual game content, which will be in a new Godot project - named "Pong-Core". This project will be exported as a mod, which will then be loaded by the "Pong" project.
 
@@ -205,11 +203,11 @@ If done right, you should have a project called "Pong-Core" with its C# project 
 
 If you made a `Main.cs` file for this project, delete it - there is no need to have a main scene in this project since it will be loaded as a mod.
 
-## Downloading assets
+# Downloading assets
 
 If you have not done so already, download the game's assets - the link is available in the "Prerequisites" section of this tutorial. Extract all of its contents into the "Pong-Core" project - you should have `Ball.png`, `PaddleRight.png`, and `PaddleLeft.png`, all under `res://`.
 
-## Defining mod metadata
+# Defining mod metadata
 
 The next step is to define a mod metadata file for "Pong-Core". A mod metadata file is an XML file containing important information about a mod, such as its unique ID, name, author, dependencies, load order, etc. **Modot** uses these to sort mods properly while loading, which ensures that mods are loaded in the most compatible way possible.
 
@@ -231,7 +229,7 @@ Create a file named `Mod.xml` with the following data:
 
 This will be moved to a different location later, but can stay as it is for now.
 
-## Game content
+# Game content
 
 The classic **Pong** game contains two paddles - controlled by a player each - and a ball, which can collide with the paddles and bounce back. A player earns a point when their opponent is unable to hit the ball back to them, and the game ends when one of the players achieves 11 points.
 
@@ -243,7 +241,7 @@ From this description, it is clear that the following classes are needed:
 
 For the sake of simplicity, this demo will not implement score-keeping or a "game over" - the game will be endless.
 
-### Ball
+## Ball
 
 To begin with, create a C# file named `Ball.cs` - this will contain the code for the ball.
 
@@ -284,7 +282,7 @@ namespace Pong
 }
 ```
 
-### Paddle
+## Paddle
 
 Next, create a C# file named `Paddle.cs`, which will contain code for the paddles.
 
@@ -342,7 +340,7 @@ namespace Pong
 }
 ```
 
-### Wall
+## Wall
 
 Now create a C# file named `Wall.cs` for the wall code.
 
@@ -378,7 +376,7 @@ namespace Pong
 }
 ```
 
-### Goal
+## Goal
 
 And finally, create a file named `Goal.cs`, which will contain the code for the goals.
 
@@ -408,7 +406,7 @@ namespace Pong
 }
 ```
 
-## Storing data as XML
+# Storing data as XML
 
 Now that the code for the game's main classes is done, the usual Godot way would be to create scenes for each one - `Ball.tscn`, `Paddle.tscn`, `Wall.tscn`, `Goal.tscn`, and so on.
 
@@ -418,7 +416,7 @@ This demo will not use scenes for the ball, paddles, walls, and goals, but will 
 
 > **Bug:** Using XML deserialization instead of scenes is necessary due to a [bug](https://github.com/godotengine/godot/issues/36828) in Godot related to `.pck` files and scenes with custom C# scripts. You can still create and use scenes if they do not use any nodes with custom C# scripts.
 
-### Ball
+## Ball
 
 First, the data for the ball. Create a file named `Ball.xml` and enter the following data into it:
 ```xml
@@ -441,7 +439,7 @@ First, the data for the ball. Create a file named `Ball.xml` and enter the follo
 </Object>
 ```
 
-### Paddles
+## Paddles
 
 Next comes the data for the paddles. Since there are two different paddles that each require different data (mainly up/down keys), two XML files will be needed.
 
@@ -487,7 +485,7 @@ Then for the left-side paddle, create an XML file named `PaddleLeft.xml` and ent
 </Object>
 ```
 
-### Walls
+## Walls
 
 Now the walls. Like the paddles, they too will need two separate XML files.
 
@@ -523,7 +521,7 @@ And one for the bottom, named `WallBottom.xml`:
 </Object>
 ```
 
-### Goals
+## Goals
 
 And finally, the XML data for the goals.
 
@@ -557,7 +555,7 @@ And a file named `GoalLeft.xml` for the left-side goal:
 </Object>
 ```
 
-## Working around non-serializable data
+# Working around non-serializable data
 
 You may have noticed that the `Sprite`s for the ball and paddles have no texture assigned to them - this is because **GDSerializer**'s default `Serializer` implementation does not know how to (de)serialize a `Texture`.
 
@@ -588,7 +586,7 @@ And similarly, for the left-side paddle:
 
 > **Wiki:** Read [Serialization](https://github.com/Carnagion/GDSerializer/wiki/Serialization) and [Deserialization](https://github.com/Carnagion/GDSerializer/wiki/Deserialization) in the **GDSerializer** wiki to understand more about how XML (de)serialization works, and the different ways of customising it.
 
-## Mod startup
+# Mod startup
 
 Now that all the code and XML data has been completed, the game needs to actually be started once the "Pong-Core" mod is loaded.
 
@@ -660,7 +658,7 @@ Goal goalLeft = serializer.Deserialize<Goal>(goalLeftXml)!;
 Goal goalRight = serializer.Deserialize<Goal>(goalRightXml)!;
 ```
 
-## Accessing the scene tree
+# Accessing the scene tree
 
 Now that the necessary nodes have been obtained, they can be added to the scene tree.
 
@@ -684,7 +682,7 @@ sceneTree.Root.AddChild(goalLeft);
 sceneTree.Root.AddChild(goalRight);
 ```
 
-## Exporting as a mod
+# Exporting as a mod
 
 The final step is to arrange the contents of the "Pong-Core" project into a mod directory, which can then be bundled together with the "Pong" project.
 
@@ -706,7 +704,7 @@ And then, the textures. Due to the way Godot's resource importing works, image f
 
 And finally, move the `res://Pong-Core` mod directory into the mods folder (`res://Mods`) of the "Pong" project. You can now close the "Pong-Core" project.
 
-## Playing the game
+# Playing the game
 
 You should be able to play the game by opening the "Pong" project and clicking the play button - if you haven't already set `Main.tscn` as the main scene, do so now.
 
@@ -716,7 +714,7 @@ If your goal was to simply learn how to create a game using **Modot**, then cong
 
 If you want to learn how to create a patch that users can add to their game, continue reading.
 
-## Patching mods
+# Patching mods
 
 Sometimes, mods may want to change the contents of other mods, but without having to execute any custom mod code or relying on the user to edit files. **Modot** provides an easy way to do this, using XML patches.
 
@@ -727,7 +725,7 @@ Sometimes, mods may want to change the contents of other mods, but without havin
 
 The following section will guide you through creating a simple mod that patches **Pong**'s ball to move towards the left initially (instead of the right).
 
-## Setting up the patch mod
+# Setting up the patch mod
 
 First, navigate to the "Pong" project's `user://Mods` directory (*not* `res://Mods`), and create a new directory named `Pong-DirectionPatch` there. This will serve as the mod directory.
 
