@@ -26,7 +26,7 @@ This walkthrough assumes that you have:
 You will also need to download/install the following, if you have not already done so:
 - [Godot Mono](https://godotengine.org/download) v3.4 (along with its dependencies such as the .NET SDK)
 - [Export templates](https://godotengine.org/download) for Godot Mono v3.4
-- [Assets](https://github.com/Carnagion/Pong/Assets) for the game
+- [Assets](https://github.com/Carnagion/Pong/tree/stable/Assets) for the game
 - A good C# editor or IDE, such as [Rider](https://www.jetbrains.com/rider/), [Visual Studio](https://visualstudio.microsoft.com/), or [Visual Studio Code](https://code.visualstudio.com/)
 
 > **Note:** Downloading an external editor is optional, but *highly* recommended. Most editors and IDEs provide advanced features - such as autocomplete, improved intellisense, quick fixes, and so on - which are not available in Godot's in-built script editor.
