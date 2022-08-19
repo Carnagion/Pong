@@ -771,4 +771,4 @@ This patch selects any XML matching the XPath `//*[@Id="Ball"]`, removes its `Di
 
 And that's all for the patch. Now run the "Pong" project again - you should see that the ball initially moves towards the left rather than the right. Since this patch is in the `user://Mods` directory, it can be removed and added at any time without having to re-export the project.
 
-This marks the end of the walkthrough, so if you have read all the way till here, then congratulations, you have a working game and patch!
+This marks the end of the walkthrough, so if you have read all the way till here, then congratulations, you have a working moddable game and patch!
