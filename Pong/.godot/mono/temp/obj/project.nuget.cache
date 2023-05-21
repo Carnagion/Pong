@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "5aT+qQLpqqNkOMdwsnRwdXdAEKfaGPgKvHvB0S5IuWqr6RJ3M9GKq1XfgCGQAwpzBkVBQssqp8ejX8GAup8URQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\fpabs\\Documents\\Game\\Pong\\Pong\\Pong.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\fpabs\\.nuget\\packages\\carnagion.morelinq\\1.4.0\\carnagion.morelinq.1.4.0.nupkg.sha512",
+    "C:\\Users\\fpabs\\.nuget\\packages\\gdlogger\\2.0.0\\gdlogger.2.0.0.nupkg.sha512",
+    "C:\\Users\\fpabs\\.nuget\\packages\\gdserializer\\3.0.0\\gdserializer.3.0.0.nupkg.sha512",
+    "C:\\Users\\fpabs\\.nuget\\packages\\godot.sourcegenerators\\4.0.2\\godot.sourcegenerators.4.0.2.nupkg.sha512",
+    "C:\\Users\\fpabs\\.nuget\\packages\\godotsharp\\4.0.2\\godotsharp.4.0.2.nupkg.sha512",
+    "C:\\Users\\fpabs\\.nuget\\packages\\godotsharpeditor\\4.0.2\\godotsharpeditor.4.0.2.nupkg.sha512",
+    "C:\\Users\\fpabs\\.nuget\\packages\\jetbrains.annotations\\2022.1.0\\jetbrains.annotations.2022.1.0.nupkg.sha512",
+    "C:\\Users\\fpabs\\.nuget\\packages\\modot\\3.0.0\\modot.3.0.0.nupkg.sha512",
+    "C:\\Users\\fpabs\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

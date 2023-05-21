@@ -6,7 +6,7 @@
     <Direction>(1, 0)</Direction>
     <Speed>200</Speed>
     <Children>
-        <item Type="Godot.Sprite">
+        <item Type="Godot.Sprite2D">
             <Name>Sprite</Name>
         </item>
         <item Type="Godot.CollisionShape2D">

@@ -2,7 +2,7 @@ using Godot;
 
 namespace Pong
 {
-    public class Ball : Area2D
+    public partial class Ball : Area2D
     {
         private string texturePath;
         
@@ -22,12 +22,12 @@ namespace Pong
 
         public override void _Ready()
         {
-            this.GetNode<Sprite>("Sprite").Texture = GD.Load<Texture>(this.texturePath);
+            this.GetNode<Sprite2D>("Sprite2D").Texture2D = GD.Load<Texture2D>(this.texturePath);
         }
 
-        public override void _Process(float delta)
+        public override void _Process(double delta)
         {
-            this.Position += this.Speed * this.Direction * delta;
+            this.Position += this.Speed * this.Direction * (float)delta;
         }
 
         public void Reset()

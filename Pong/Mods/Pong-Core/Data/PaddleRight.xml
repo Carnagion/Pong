@@ -6,7 +6,7 @@
     <UpAction>Up</UpAction>
     <DownAction>Down</DownAction>
     <Children>
-        <item Type="Godot.Sprite">
+        <item Type="Godot.Sprite2D">
             <Name>Sprite</Name>
         </item>
         <item Type="Godot.CollisionShape2D">

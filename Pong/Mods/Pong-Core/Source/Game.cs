@@ -6,10 +6,10 @@ using Godot.Serialization;
 
 namespace Pong
 {
-    internal static class Game
+    public static class Game
     {
         [ModStartup]
-        private static void OnModStartup()
+        public static void OnModStartup()
         {
             Mod pongCore = ModLoader.LoadedMods["Pong-Core"];
             XmlDocument data = pongCore.Data!;

@@ -1,0 +1,13 @@
+2a60927148abd1d33b818b535e306557
+::res://::1684657929
+default_env.tres::Environment::-1::1684657914::0::1::::<><>::
+icon.png::CompressedTexture2D::1992299985935236783::1684656692::1684657930::1::::<><>::
+Main.cs::CSharpScript::-1::1684657914::0::1::::<><>::
+Main.tscn::PackedScene::-1::1684657914::0::1::::<><>::res://Main.cs
+::res://Mods/::1684656692
+::res://Mods/Pong-Core/::1684656692
+::res://Mods/Pong-Core/Assemblies/::1684656692
+::res://Mods/Pong-Core/Data/::1684656692
+::res://Mods/Pong-Core/Resources/::1684656692
+::res://Mods/Pong-DirectionPatch/::1684656692
+::res://Mods/Pong-DirectionPatch/Patches/::1684656692

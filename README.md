@@ -24,8 +24,8 @@ This walkthrough assumes that you have:
 > **Note:** If you are new to Godot, C#, or programming in general, consider completing Godot's official [Getting Started](https://docs.godotengine.org/en/3.5/getting_started/introduction/index.html#) section first.
 
 You will also need to download/install the following, if you have not already done so:
-- [Godot Mono](https://godotengine.org/download) v3.4 (along with its dependencies such as the .NET SDK)
-- [Export templates](https://godotengine.org/download) for Godot Mono v3.4
+- [Godot Mono](https://godotengine.org/download) v4.0.2 (along with its dependencies such as the .NET SDK)
+- [Export templates](https://godotengine.org/download) for Godot Mono v4.0.2
 - [Assets](https://github.com/Carnagion/Pong/tree/stable/Assets) for the game
 - A good C# editor or IDE, such as [Rider](https://www.jetbrains.com/rider/), [Visual Studio](https://visualstudio.microsoft.com/), or [Visual Studio Code](https://code.visualstudio.com/)
 
@@ -64,15 +64,10 @@ You may notice that the C# project file is not created yet - this is because God
 
 Now open the C# project file (`Pong.csproj`) - you may need an external editor to do this.
 
-The first (and most important) change is to set the target framework to .NET Standard 2.1. **Modot** only supports .NET Standard 2.1 and will not work with .NET Framework 4.7.2 or any other target framework. You can change the target framework like so (the value will be `net472` by default):
-```xml
-<TargetFramework>netstandard2.1</TargetFramework>
-```
-
 Next, add **Modot** as a dependency. It is available as a [NuGet package](https://nuget.org/packages/Modot), so it can easily be installed by including the following lines:
 ```xml
 <ItemGroup>
-    <PackageReference Include="Modot" Version="2.0.2"/>
+    <PackageReference Include="Modot" Version="3.0.0"/>
 </ItemGroup>
 ```
 
@@ -135,7 +130,7 @@ You can also put the this class inside a namespace, and change its modifiers lik
 ```cs
 namespace Pong
 {
-    internal sealed class Main : Node
+    internal sealed partial class Main : Node
     {
     }
 }
@@ -156,8 +151,9 @@ private void LoadAllMods()
 
 However, `res://` paths may not have a native OS equivalent due to the way Godot exports its projects - meaning that mods from `res://Mods` will first have to be copied over to `user://Mods` before loading them. This can be done like so:
 ```cs
-using Directory directory = new();
-directory.CopyContents("res://Mods", "user://Mods", true);
+string modsPath = ProjectSettings.GlobalizePath("user://Mods");
+using DirAccess directory = DirAccess.Open("res://Mods");
+directory.CopyContents("res://Mods", modsPath, true);
 ```
 
 > **Wiki:** Read [Loading mods](https://github.com/Carnagion/Modot/wiki/Loading-mods) in the **Modot** wiki to understand more about how and why mods from `res://` must be copied over to a corresponding `user://` directory.
@@ -170,7 +166,6 @@ You may notice that the `res://Mods` directory doesn't actually exist yet, so go
 
 The full paths of all mod directories can then be obtained as follows:
 ```cs
-string modsPath = ProjectSettings.GlobalizePath("user://Mods");
 string[] modDirectoryPaths = System.IO.Directory.GetDirectories(modsPath);
 ```
 
@@ -253,8 +248,9 @@ using Godot;
 
 namespace Pong
 {
-    public class Ball : Area2D
+   public partial class Ball : Area2D
     {
+        
         private Vector2 initialPosition;
 
         public int Speed
@@ -269,9 +265,9 @@ namespace Pong
             set;
         }
 
-        public override void _Process(float delta)
+        public override void _Process(double delta)
         {
-            this.Position += this.Speed * this.Direction * delta;
+            this.Position += this.Speed * this.Direction * (float)delta;
         }
 
         public void Reset()
@@ -296,44 +292,44 @@ using Godot;
 
 namespace Pong
 {
-    public class Paddle : Area2D
-    {   
+    public partial class Paddle : Area2D
+    {
         public int Speed
         {
             get;
             set;
         }
-        
-        public KeyList UpAction
+
+        public Key UpAction
         {
             get;
             set;
         }
-        
-        public KeyList DownAction
+
+        public Key DownAction
         {
             get;
             set;
         }
-        
+
         public override void _Ready()
         {
-            this.Connect("area_entered", this, nameof(this.OnAreaEntered));
+            AreaEntered += OnAreaEntered;
         }
-        
-        public override void _Process(float delta)
+
+        public override void _Process(double delta)
         {
-            int up = Input.IsKeyPressed((int)this.UpAction) ? -1 : 0;
-            int down = Input.IsKeyPressed((int)this.DownAction) ? 1 : 0;
-            this.Position += new Vector2(0, this.Speed * delta * (up + down));
-            this.Position = new(this.Position.x, Math.Clamp(this.Position.y, 16, this.GetViewportRect().Size.y - 16));
+            int up = Input.IsKeyPressed(this.UpAction) ? -1 : 0;
+            int down = Input.IsKeyPressed(this.DownAction) ? 1 : 0;
+            this.Position += new Vector2(0, this.Speed * (float)delta * (up + down));
+            this.Position = new(this.Position.X, Math.Clamp(this.Position.Y, 16, this.GetViewportRect().Size.Y - 16));
         }
-        
+
         private void OnAreaEntered(Area2D area)
         {
             if (area is Ball ball)
             {
-                ball.Direction = new Vector2(-Math.Sign(ball.Direction.x), ((float)new Random().NextDouble() * 2) - 1).Normalized();
+                ball.Direction = new Vector2(-Math.Sign(ball.Direction.X), ((float)new Random().NextDouble() * 2) - 1).Normalized();
             }
         }
     }
@@ -352,7 +348,7 @@ using Godot;
 
 namespace Pong
 {
-    public class Wall : Area2D
+    public partial class Wall : Area2D
     {
         public Vector2 BounceDirection
         {
@@ -362,7 +358,7 @@ namespace Pong
 
         public override void _Ready()
         {
-            this.Connect("area_entered", this, nameof(this.OnAreaEntered));
+            AreaEntered += OnAreaEntered;
         }
 
         private void OnAreaEntered(Area2D area)
@@ -388,11 +384,11 @@ using Godot;
 
 namespace Pong
 {
-    public class Goal : Area2D
+	public partial class Goal : Area2D
     {
         public override void _Ready()
         {
-            this.Connect("area_entered", this, nameof(this.OnAreaEntered));
+            AreaEntered += OnAreaEntered;
         }
         
         private void OnAreaEntered(Area2D area)
@@ -452,7 +448,7 @@ For the right-side paddle, create a file named `PaddleRight.xml` and enter the f
     <UpAction>Up</UpAction>
     <DownAction>Down</DownAction>
     <Children>
-        <item Type="Godot.Sprite">
+        <item Type="Godot.Sprite2D">
             <Name>Sprite</Name>
         </item>
         <item Type="Godot.CollisionShape2D">
@@ -473,7 +469,7 @@ Then for the left-side paddle, create an XML file named `PaddleLeft.xml` and ent
     <UpAction>W</UpAction>
     <DownAction>S</DownAction>
     <Children>
-        <item Type="Godot.Sprite">
+        <item Type="Godot.Sprite2D">
             <Name>Sprite</Name>
         </item>
         <item Type="Godot.CollisionShape2D">
@@ -566,7 +562,7 @@ private string texturePath;
 
 A texture from the given path can be loaded in `_Ready()` like so:
 ```cs
-this.GetNode<Sprite>("Sprite").Texture = GD.Load<Texture>(this.texturePath);
+this.GetNode<Sprite2D>("Sprite").Texture = GD.Load<Texture2D>(this.texturePath);
 ```
 
 Then, for the ball, enter this line under the root XML node:

@@ -2,11 +2,11 @@ using Godot;
 
 namespace Pong
 {
-    public class Goal : Area2D
+    public partial class Goal : Area2D
     {
         public override void _Ready()
         {
-            this.Connect("area_entered", this, nameof(this.OnAreaEntered));
+            AreaEntered += OnAreaEntered;
         }
         
         private void OnAreaEntered(Area2D area)
