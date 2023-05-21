@@ -1,5 +1,6 @@
 *.sln
 *.idea/
 Pong/.import/
-Pong/.mono/
+*.mono/
+Pong/.godot/
 *.vs/
